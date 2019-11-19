@@ -10,13 +10,13 @@ pipeline {
 		stage('Invoke Code Quality Check') {
             steps {
                 echo "Sonar code quality check"
-				withSonarQubeEnv('SonarQubeServer') { // If you have configured more than one global server connection, you can specify its name
-				if(isUnix()){
-					sh 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
-				}
-				else{
-					bat label: 'Sonar Scanner CMD', returnStdout: true, script: 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
+				withSonarQubeEnv('SonarQubeServer') { 
+					/*if(isUnix()){
+						sh 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
 					}
+					else{*/
+						bat label: 'Sonar Scanner CMD', returnStdout: true, script: 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
+						//}
 				}
             }
         }
