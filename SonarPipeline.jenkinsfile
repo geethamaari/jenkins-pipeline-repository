@@ -4,7 +4,7 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 echo "Checkout project source code"
-				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${build.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: "${gitRepo}"]]])
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${currentBuild.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: "${gitRepo}"]]])
             }
         }
 		stage('Invoke Code Quality Check') {
