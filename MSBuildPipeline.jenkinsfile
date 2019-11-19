@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo "Checkout project source code"
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${currentBuild.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: "${gitRepo}"]]])
+            }
+        }
+		stage('Buile Pipeline') {
+            steps {
+                echo "Compiling and Packaging code"
+				echo " TODO"
+            }
+        }
+    }
+}
