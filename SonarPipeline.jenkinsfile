@@ -15,7 +15,7 @@ pipeline {
 						sh 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
 					}
 					else{*/
-					dir(currentBuild.number){
+					dir("${currentBuild.number}"){
 						bat label: 'Sonar Scanner CMD', returnStdout: true, script: 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
 						}
 						//}
