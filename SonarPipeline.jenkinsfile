@@ -4,14 +4,19 @@ pipeline {
         stage('SCM Checkout') {
             steps {
                 echo "Checkout project source code"
-				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: 'https://github.com/geethamaari/Devops-Test.git']]])
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${build.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: 'https://github.com/geethamaari/Devops-Test.git']]])
             }
         }
 		stage('Invoke Code Quality Check') {
             steps {
                 echo "Sonar code quality check"
 				withSonarQubeEnv('SonarQubeServer') { // If you have configured more than one global server connection, you can specify its name
+				if(isUnix()){
+					sh 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
+				}
+				else{
 					bat label: 'Sonar Scanner CMD', returnStdout: true, script: 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
+					}
 				}
             }
         }
