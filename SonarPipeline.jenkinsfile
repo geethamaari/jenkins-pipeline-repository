@@ -1,6 +1,5 @@
 pipeline {
-    agent :
-	{label:"masternode"}
+    agent any
     stages {
         stage('SCM Checkout') {
             steps {
