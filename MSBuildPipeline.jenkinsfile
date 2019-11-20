@@ -1,6 +1,6 @@
 pipeline {
       environment {
-             MSBUILD = "C:\Program Files (x86)\MSBuild\14.0\Bin"
+             MSBUILD = "C:/Program Files (x86)/MSBuild/14.0/Bin"
              CONFIG = 'Release'
              PLATFORM = 'x64'
   }
