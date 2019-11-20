@@ -1,4 +1,9 @@
 pipeline {
+      environment {
+             MSBUILD = "C:\Program Files (x86)\MSBuild\14.0\Bin"
+             CONFIG = 'Release'
+             PLATFORM = 'x64'
+  }
     agent any
     stages {
         stage('SCM Checkout') {
@@ -7,11 +12,11 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${currentBuild.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: "${gitRepo}"]]])
             }
         }
-		stage('Buile Pipeline') {
-            steps {
-                echo "Compiling and Packaging code"
-				echo " TODO"
-            }
+		stage('Build') {
+             steps {
+                    bat "NuGet.exe restore your_project.sln"
+                    bat "\"${MSBUILD}\" your_project.sln /p:Configuration=${env.CONFIG};Platform=${env.PLATFORM} /maxcpucount:%NUMBER_OF_PROCESSORS% /nodeReuse:false"
+                }
         }
     }
 }
