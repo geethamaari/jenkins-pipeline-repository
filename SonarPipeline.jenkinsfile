@@ -16,7 +16,7 @@ pipeline {
 					}
 					else{*/
 					dir("${currentBuild.number}"){
-						bat label: 'Sonar Scanner CMD', returnStdout: true, script: 'sonar-scanner -Dsonar.projectKey=TotalTAUI -Dsonar.sources=.'
+						bat label: 'Sonar Scanner CMD', returnStdout: true, script: 'sonar-scanner -Dsonar.projectKey=TotalTA-UI -Dsonar.sources=.'
 						}
 						//}
 				}
