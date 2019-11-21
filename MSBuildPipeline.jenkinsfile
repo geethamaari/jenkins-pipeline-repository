@@ -11,9 +11,8 @@ pipeline {
          stage('Install Dependency') {
             steps {
                 echo "npm install"
-		withNPM {
-                   bat label: '', script: '''npm install'''
-                }
+	        bat label: '', script: '''npm install'''
+                
             }
         }
     }
