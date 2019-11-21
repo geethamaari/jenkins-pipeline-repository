@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    tools {'NodeJS'}
     stages {
         stage('SCM Checkout') {
             steps {
@@ -12,7 +11,7 @@ pipeline {
             steps {
                 echo "npm install"
 		withNPM {
-                   bat label: '', script: '''npm install'''
+                   bat label: '', script: '''npm run build'''
                 }
             }
         }
