@@ -7,10 +7,12 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${currentBuild.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: "${gitRepo}"]]])
             }
         }
-	stage('Build') {
+         stage('Build') {
             steps {
                 echo "npm install"
-				bat label: '', script: '''npm install'''
+		withNPM {
+                   bat label: '', script: '''npm install'''
+                }
             }
         }
     }
