@@ -11,7 +11,7 @@ pipeline {
          stage('Install Dependency') {
             steps {
                 echo "npm install"
-	        bat label: '', script: '''npm install'''
+	        bat label: '', script: '''npm run build'''
                 
             }
         }
