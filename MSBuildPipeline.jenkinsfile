@@ -11,11 +11,7 @@ pipeline {
          stage('Install Dependency') {
             steps {
                 echo "npm install"
-				withNPM {
-                                bat label: '', script: '''npm run build'''
-				build 'https://github.com/geethamaari/Devops-Test.git'
-                }
-	            
+	        bat label: '', script: '''npm install'''
                 
             }
         }
