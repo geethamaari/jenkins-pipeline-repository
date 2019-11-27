@@ -8,23 +8,23 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${currentBuild.number}"]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '8bfa9789-4a7b-4929-acbf-fb03d695b903', url: "${gitRepo}"]]])
             }
         }
-         stage('Install Dependency') {
+         stage('build') {
             steps {
                 echo "npm install"
 	        bat label: '', script: '''npm install'''
                 
             }
         }
-	 stage('build') {
-          steps {
-             bat 'echo step1'
-             bat 'echo step2'
-             bat '''
-                echo 'Multiline'
-                echo 'Example'
-             '''
-             echo 'not using shell'
-          }
-        }
+	 //stage('build') {
+          //steps {
+            // bat 'echo step1'
+            // bat 'echo step2'
+            // bat '''
+               // echo 'Multiline'
+              //  echo 'Example'
+           //  '''
+           //  echo 'not using shell'
+         // }
+       // }
     }
 }
